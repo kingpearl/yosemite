@@ -1,0 +1,44 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          monitors
+# Required-Start:    $remote_fs $network
+# Required-Stop:     $remote_fs $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Startup script for mon(1).
+# Description:
+### END INIT INFO
+
+##
+# Yosemite Monitors
+# Copyright(c) 2015 King Pearl LLC
+##
+NAME=monitors
+PATH=/vagrant
+
+start() {
+    $PATH/bin/monitors -c $PATH/core.conf production start
+}
+
+stop() {
+    $PATH/bin/monitors -c $PATH/core.conf production stop
+}
+
+restart() {
+    $PATH/bin/monitors -c $PATH/core.conf production restart
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        restart
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        ;;
+esac

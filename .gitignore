@@ -1,0 +1,34 @@
+# Compiled Python files
+*.pyc
+
+# Folder view configuration files
+.DS_Store
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+.bash_profile
+.bashrc
+.cache/
+.cloud-locale-test.skip
+.gitattributes
+.hushlogin
+.inputrc
+.screenrc
+.lesshst
+.node-gyp
+.migrate
+.npm
+.vagrant
+.vim
+.viminfo
+.vimrc
+node_modules
+terraform.*
+var

@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+/**
+ * Yosemite App
+ * Copyright(c) 2015 King Pearl LLC
+ */
+var fs = require('fs'),
+http = require('http'),
+https = require('https'),
+program = require('commander'),
+app = require('../app')()
+
+// , tls = {
+// 	key: fs.readFileSync(__dirname + '/../.ssh/core.key'),
+// 	cert: fs.readFileSync(__dirname + '/../.ssh/core.crt'),
+// 	ca: fs.readFileSync(__dirname + '/../.ssh/core.ca')
+// }
+
+program
+.version('2.0.0')
+.usage('[options]')
+.option('-n, --number [workers]', 'Number of workers to spawn.')
+.option('-w, --watch', 'Watch the app directory for changes.')
+.parse(process.argv)
+
+var port = program.port ? parseInt(program.port, 10): (process.env.PORT || 5000)
+
+app.cluster(program, 
+function() {
+	var server = app.createServer({ port: port })
+	httpServer = http.createServer(server.callback())
+	// , httpsServer = http2.createServer(tls, server.callback())
+	
+	httpServer.listen(port)
+	console.log('Yosemite App listening on port %d', port)	
+	port = port === 80 ? 443: port + 443
+	// httpsServer.listen(port)
+	// console.log('Yosemite App listening on port %d', port)
+
+	if (program.watch) {
+		console.log('Watching files for change')
+		
+		app.watch(app.files(process.cwd()),
+		function (file) {
+		    console.log('Change detected - reloading', file)
+			
+			process.exit()
+		})
+	}
+})

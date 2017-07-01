@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+/**
+ * Yosemite App
+ * Copyright(c) 2015 King Pearl LLC
+ */
+var program = require('commander'),
+repl = require('../repl')
+
+program
+.version('1.0.0')
+.usage('[options]')
+
+.parse(process.argv)
+
+repl()
