@@ -10,7 +10,7 @@
         "co-busboy": "1.x.x",
         "koa": "2.x.x",
         "koa-bodyparser": "4.x.x",
-        "koa-compress": "2.x.x",
+        "koa-compress": "3.x.x",
         "koa-logger": "3.x.x",
         "koa-route": "3.x.x",
         "mime-types": "2.x.x"
